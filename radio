@@ -1,0 +1,60 @@
+#!/bin/sh
+# depends on mplayer
+
+OPERA="TBD"
+Q2=http://wqxr-q2.streamguys.com/q2
+RINSEFM=http://podcast.dgen.net:8000/rinseradio
+WFMU_DRUMMER=http://stream0.wfmu.org:80/drummer
+WFMU=http://stream0.wfmu.org/freeform-128k
+ROCK_AND_SOUL=http://stream0.wfmu.org/ichiban
+WQXR=http://204.93.192.136:80/wqxr
+
+
+
+if [ "$1" = "opera" ]
+then  
+  echo "Still waiting on the opera stream"
+  exit
+fi
+
+if [ "$1" = "q2" ]
+then  
+  mplayer $Q2
+  exit
+fi
+
+if [ "$1" = "rinsefm" ]
+then  
+  mplayer $RINSEFM
+  exit
+fi
+
+if [ "$1" = "drummer" ]
+then  
+  mplayer $WFMU_DRUMMER
+  exit
+fi
+
+if [ "$1" = "wfmu" ]
+then  
+  mplayer $WFMU
+  exit
+fi
+
+if [ "$1" = "wqxr" ]
+then  
+  mplayer $WQXR
+  exit
+fi
+
+if [ "$1" = "ichiban" ]
+then  
+  mplayer $ROCK_AND_SOUL
+  exit
+fi
+
+
+
+echo "choose one of:"
+echo "wqxr, opera, q2, rinsefm, drummer, wfmu, ichiban"
+exit

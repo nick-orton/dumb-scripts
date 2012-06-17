@@ -1,0 +1,4 @@
+#!/bin/sh
+# pipes my soundcards input to output so I can listen my record player
+
+arecord -f cd | aplay
