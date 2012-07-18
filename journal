@@ -1,9 +1,10 @@
 #!/bin/sh
 
-# Usage:
-#  journal Here is the text describing what I'm starting to do
+# Journal
+#
+# journal is a simple shell script to keep track of your day
+# type: journal 
 
-# TODO: add a help flag
 #------------------------------------------------------------
 
 # TODO: use a .journalrc to set vars
@@ -11,11 +12,46 @@ JOURNAL_DIR=~/docs/journal
 FILE_PREFIX=journal
 TODAYS_FILE=$JOURNAL_DIR/$FILE_PREFIX-`date "+%y-%m-%d"` 
 
-# Write the text after the command to the end of the file 
-#  prefixed with a timestamp
-#
-echo `date "+%H:%M"` $@ >> $TODAYS_FILE
+if [ $# -eq 1 ]
+then
 
-# symlink a file marking today's journal
-#
-ln -nfs $TODAYS_FILE $JOURNAL_DIR/today
+	# list all the contents of today's journal
+	#
+  if [ $1 = "list" ]
+  then
+  	cat $TODAYS_FILE
+
+	# echo the last/current activity
+	#
+  elif [ $1 = "last" ]
+  then
+  	tail -1 $TODAYS_FILE
+
+	# edit today's journal
+	#
+  elif [ $1 = "edit" ]
+  then
+    vim $TODAYS_FILE
+
+	# display help
+	#
+  elif [ $1 = "help" ]
+  then
+  	echo "journal <command> | <activity>"
+  	echo "  commands:"
+  	echo "    list - list all activities today"
+  	echo "    last - show last/current activity"
+  	echo "    help - this documentation"
+  	echo " enterning text that does not start with a command adds an activity to today's journal"
+  fi
+
+else
+  # Write the text after the command to the end of the file 
+  #  prefixed with a timestamp
+  #
+  echo `date "+%H:%M"` $@ >> $TODAYS_FILE
+
+  # symlink a file marking today's journal
+  #
+  ln -nfs $TODAYS_FILE $JOURNAL_DIR/today
+fi
