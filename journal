@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Usage:
+#  journal Here is the text describing what I'm starting to do
+
+# TODO: add a help flag
+#------------------------------------------------------------
+
+# TODO: use a .journalrc to set vars
+JOURNAL_DIR=~/docs/journal
+FILE_PREFIX=journal
+TODAYS_FILE=$JOURNAL_DIR/$FILE_PREFIX-`date "+%y-%m-%d"` 
+
+# Write the text after the command to the end of the file 
+#  prefixed with a timestamp
+#
+echo `date "+%H:%M"` $@ >> $TODAYS_FILE
+
+# symlink a file marking today's journal
+#
+ln -nfs $TODAYS_FILE $JOURNAL_DIR/today
