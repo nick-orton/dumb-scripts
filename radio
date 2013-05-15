@@ -10,7 +10,6 @@ ROCK_AND_SOUL=http://stream0.wfmu.org/ichiban
 WQXR=http://204.93.192.136:80/wqxr
 
 
-
 if [ "$1" = "opera" ]
 then  
   echo "Still waiting on the opera stream"
@@ -19,37 +18,50 @@ fi
 
 if [ "$1" = "q2" ]
 then  
-  mplayer $Q2
+  mplayer $Q2 > /dev/null &
   exit
 fi
 
+if [ "$1" = "wkcr" ]
+then  
+  mplayer http://kanga.college.columbia.edu:8000/ > /dev/null &
+  exit
+fi
+
+
 if [ "$1" = "rinsefm" ]
 then  
-  mplayer $RINSEFM
+  mplayer $RINSEFM > /dev/null &
   exit
 fi
 
 if [ "$1" = "drummer" ]
 then  
-  mplayer $WFMU_DRUMMER
+  mplayer $WFMU_DRUMMER > /dev/null &
   exit
 fi
 
 if [ "$1" = "wfmu" ]
 then  
-  mplayer $WFMU
+  mplayer $WFMU > /dev/null &
   exit
 fi
 
 if [ "$1" = "wqxr" ]
 then  
-  mplayer $WQXR
+  mplayer $WQXR > /dev/null &
   exit
 fi
 
 if [ "$1" = "ichiban" ]
 then  
-  mplayer $ROCK_AND_SOUL
+  mplayer $ROCK_AND_SOUL > /dev/null &
+  exit
+fi
+
+if [ "$1" = "off" ]
+then
+  killall mplayer
   exit
 fi
 
